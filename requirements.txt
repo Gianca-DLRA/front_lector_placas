@@ -1,2 +1,2 @@
 streamlit
-pip install opencv-python-headless
+opencv-python
