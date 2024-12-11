@@ -1,1 +1,2 @@
 streamlit
+pip install opencv-python ==4.10.0.84
