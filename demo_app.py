@@ -15,7 +15,10 @@ def send_image_to_api(uploaded_file):
         API response or None
     """
     try:
-        # Read the image file
+        # Define the API URL
+        url = "http://3.20.238.57:80/detect"
+        
+        # Open the image file 
         image = Image.open(uploaded_file)
         
         # Convert image to bytes
@@ -24,42 +27,17 @@ def send_image_to_api(uploaded_file):
         img_byte_arr = img_byte_arr.getvalue()
         
         # Prepare files for upload
-        files = {'image': (uploaded_file.name, img_byte_arr, uploaded_file.type)}
+        files = {"file": (uploaded_file.name, img_byte_arr, uploaded_file.type)}
         
-        # Replace with your actual API endpoint
-        api_url = "http://3.20.238.57:80/detect" 
-        #CAMBIAR CON EL ENDPOINT DE LA API NUESTRA
-
-        # Open the image file in binary mode
-        with open(uploaded_file, "rb") as image_file:
-            # Specify the MIME type explicitly
-            files = {"file": ("plate1.jpg", image_file, "image/jpeg")}
-            try:
-                # Send the POST request with the image file
-                response = requests.post(api_url, files=files)
-
-                # Check the response status
-                if response.status_code == 200:
-                    # Print the JSON response 
-                    st.success("¡Imagen subida con éxito!")
-                    return response.json()
-                else:
-                    st.error(f"Publicación fallida. Error: {response.status_code}")
-                    return f"Error: {response.status_code}"
-                    
-            except requests.exceptions.RequestException as e:
-                print(f"Error connecting to the API: {e}")
-
         # Send POST request
-        response = requests.post(api_url, files=files)
-
+        response = requests.post(url, files=files)
         
         # Check response
         if response.status_code == 200:
-            st.success("¡Imagen subida con éxito!")
+            st.success("¡Imagen procesada con éxito!")
             return response.json()
         else:
-            st.error(f"Publicación fallida. Error: {response.status_code}")
+            st.error(f"Procesamiento fallido. Error: {response.status_code}")
             return None
     
     except Exception as e:
