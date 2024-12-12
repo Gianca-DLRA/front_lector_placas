@@ -38,7 +38,7 @@ def send_image_to_api(uploaded_file):
             st.success("¡Imagen subida con éxito!")
             return response.json()
         else:
-            st.error(f"Publicación fallida. Error: {response.status_code}")
+            st.error(f"Publicación fallida. Error: a {response.status_code}")
             return None
     
     except Exception as e:
