@@ -16,7 +16,7 @@ def send_image_to_api(uploaded_file):
     """
     try:
         # Define the API URL
-        url = "http://3.20.238.57:80/detect"
+        url = "http://18.191.169.117:80/detect""
         
         # Open the image file 
         image = Image.open(uploaded_file)
