@@ -82,7 +82,7 @@ def main():
                 st.json(file_details)
                 
                 # Upload button for individual image
-                if st.button(f"Sube la imagen {uploaded_file.name}"):
+                if st.button(f"Obtener placa {uploaded_file.name}"):
                     # Send image to API
                     response = send_image_to_api(uploaded_file)
                     
