@@ -30,15 +30,36 @@ def send_image_to_api(uploaded_file):
         api_url = "http://3.20.238.57:80/detect" 
         #CAMBIAR CON EL ENDPOINT DE LA API NUESTRA
 
+        # Open the image file in binary mode
+        with open(uploaded_file, "rb") as image_file:
+            # Specify the MIME type explicitly
+            files = {"file": ("plate1.jpg", image_file, "image/jpeg")}
+            try:
+                # Send the POST request with the image file
+                response = requests.post(api_url, files=files)
+
+                # Check the response status
+                if response.status_code == 200:
+                    # Print the JSON response 
+                    st.success("¡Imagen subida con éxito!")
+                    return response.json()
+                else:
+                    st.error(f"Publicación fallida. Error: {response.status_code}")
+                    return f"Error: {response.status_code}"
+                    
+            except requests.exceptions.RequestException as e:
+                print(f"Error connecting to the API: {e}")
+
         # Send POST request
         response = requests.post(api_url, files=files)
+
         
         # Check response
         if response.status_code == 200:
             st.success("¡Imagen subida con éxito!")
             return response.json()
         else:
-            st.error(f"Publicación fallida. Error: a {response.status_code}")
+            st.error(f"Publicación fallida. Error: {response.status_code}")
             return None
     
     except Exception as e:
