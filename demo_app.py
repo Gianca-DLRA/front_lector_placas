@@ -27,7 +27,7 @@ def send_image_to_api(uploaded_file):
         files = {'image': (uploaded_file.name, img_byte_arr, uploaded_file.type)}
         
         # Replace with your actual API endpoint
-        api_url = "https://your-api-endpoint.com/process" 
+        api_url = "http://3.20.238.57:80/detect" 
         #CAMBIAR CON EL ENDPOINT DE LA API NUESTRA
 
         # Send POST request
